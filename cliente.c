@@ -25,7 +25,7 @@ int main(int argc, char **argv) {
   int adl=sizeof(me);
 
   // Vetor linha contem o texto a ser enviado para o servidor
-  char linha[80];
+  char linha[2000];
 
   // Variáveis Windows
   #ifdef WIN32
@@ -94,15 +94,15 @@ int main(int argc, char **argv) {
     gets(linha);
     
     // Enviar o texto para o servidor
-    sendto(sock,linha,81,0,(struct sockaddr *)&server,adl);
+    sendto(sock,linha,2000,0,(struct sockaddr *)&server,adl);
 
     // Receber o texto do servidor
-    recvfrom(sock,linha,81,0,(struct sockaddr *)&server,&adl);
+    recvfrom(sock,linha,2000,0,(struct sockaddr *)&server,&adl);
 
     // Escrever na tela o que o servidor mandar
     puts(linha);
 
-  } while ( strcmp (linha+7,"sair") );
+  } while ( strcmp (linha,"sair") );
 
   // Comando para fechar conexão Windows
   #ifdef WIN32
