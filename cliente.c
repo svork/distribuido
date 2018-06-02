@@ -19,6 +19,21 @@
 // Biblioteca Padrão de Entrada/Saída de dados
 #include <stdio.h>
 
+// Biblioteca de Strings
+#include <string.h>
+
+// Variável nome guarda o nome do cliente
+char nome[20] = {'J', 'o', 's', 'e'};
+
+// Variável comida guarda o número do prato escolhido
+int comida = 0;
+
+// Variável bebida guarda o número da bebida escolhido
+int bebida = 0;
+
+// Variável pagamento guarda o número do pagamento escolhido
+int pagamento = 0;
+
 // Print na mesma posição, algo como um clear screen, dica do Tonight
 void limpar(void) {
   printf("\e[2J\e[H");
@@ -41,15 +56,25 @@ void inicio(void) {
 
 // Função escolher_nome - pede para o cliente digitar o nome
 void escolher_nome(void) {
+  char name[20];
+
   printf("=======================================================================\n");
+  printf("Nome do Cliente\n");
   printf("\n");
   printf("Digite seu nome: \n");
   printf("\n");
+  gets(name);
+
+  // Copiar o que o usuário digitou para o vetor nome
+  memcpy(nome, name, sizeof nome);
 }
 
 // Função escolher_comida - pede para o cliente digitar o número do prato
-void escolher_comida(void) {
+int escolher_comida(void) {
+  int comida = 0;
+
   printf("=======================================================================\n");
+  printf("Escolha um de nossos deliciosos pratos\n");
   printf("\n");
   printf("(0) - Marinado de salmão com lentilha puy\n");
   printf("(1) - Peixe à grega com tomates marinados\n");
@@ -64,11 +89,18 @@ void escolher_comida(void) {
   printf("\n");
   printf("Digite o numero desejado: \n");
   printf("\n");
+  scanf("%d", &comida);
+
+  // Retornar o valor escolhido
+  return comida;
 }
 
 // Função escolher_bebida - pede para o cliente digitar o número da bebida
-void escolher_bebida(void) {
+int escolher_bebida(void) {
+  int comida = 0;
+
   printf("=======================================================================\n");
+  printf("Escolha a sua bebida favorita\n");
   printf("\n");
   printf("(0) - Vinho Azul\n");
   printf("(1) - Catuaba com açaí\n");
@@ -81,26 +113,45 @@ void escolher_bebida(void) {
   printf("\n");
   printf("Digite o numero desejado: \n");
   printf("\n");
+  scanf("%d", &bebida);
+
+  // Retornar o valor escolhido
+  return bebida;
 }
 
 // Função escolher_pagamento - pede para o cliente digitar o número da forma de pagamento
-void escolher_pagamento(void) {
+int escolher_pagamento(void) {
+  int pagamento = 0;
+
   printf("=======================================================================\n");
+  printf("Qual será a forma de pagamento?\n");
   printf("\n");
-  printf("0) - Dinheiro\n");
-  printf("1) - Cartão de Crédito\n");
-  printf("2) - Cripto Moedas\n");
+  printf("(0) - Dinheiro\n");
+  printf("(1) - Cartão de Crédito\n");
+  printf("(2) - Cripto Moedas\n");
   printf("\n");
   printf("Digite o numero desejado: \n");
   printf("\n");
+  scanf("%d", &pagamento);
+
+  // Retornar o valor escolhido
+  return pagamento;
 }
 
 // Função confirmar_pedido - exibe os detalhes do pedido do cliente
-void confirmar_pedido(void) {
+void confirmar_pedido(char nome[20], int comida, int bebida, int pagamento) {
   printf("=======================================================================\n");
-  printf ("Cliente %s", nome,", seu pedido foi: %d e um %d ", comida, bebida,", e a forma de pagamento escolhida foi: %d", pagamento);
-  printf ("\nSeu pedido será entregue em: 10 minutos.\n");
+  printf("Este é o seu pedido\n");
+  printf("\n");
+  printf ("Nome do Cliente: %s\n", nome);
+  printf("Comida: %d\n", comida);
+  printf("Bebida: %d\n", bebida);
+  printf("Forma de Pagamento: %d\n", pagamento);
+  printf("\n");
+  printf ("Seu pedido será entregue em: 10 minutos.\n");
   printf ("Após 15 segundos essa mensagem se auto-destruirá.\n");
+  printf("\n");
+  printf("============================  FIM  ====================================\n");
 }
 
 // Função escolher_tela - recebe um inteiro e exibe a tela escolhida
@@ -113,7 +164,7 @@ void escolher_tela(int numero) {
 
     case 1 :
       // Número 1 sai do sistema
-      exit(1);
+      //exit(1);
       break;
 
     case 2 :
@@ -123,27 +174,27 @@ void escolher_tela(int numero) {
 
     case 3 :
       // Escolher Comida
-      escolher_comida();
+      comida = escolher_comida();
       break;
 
     case 4 :
       // Escolher Bebida
-      escolher_bebida();
+      bebida = escolher_bebida();
       break;
 
     case 5 :
       // Escolher Pagamento
-      escolher_pagamento();
+      pagamento = escolher_pagamento();
       break;
 
     case 6 :
       // Confirmar Pedido
-      confirmar_pedido();
+      confirmar_pedido(nome, comida, bebida, pagamento);
       break;
 
     default :
       // Mensagem de erro
-      printf("Opcao Invalida\n");
+      printf("\nOpcao Invalida! Digite 'sair' para fechar o sistema.\n");
       break;
   }
 }
@@ -158,18 +209,6 @@ int main(int argc, char **argv) {
 
   // Variável tela define qual será enviada para o cliente
   int tela = 0;
-
-  // Variável nome guarda o nome do cliente
-  char nome[20];
-
-  // Variável comida guarda o número do prato escolhido
-  int comida = 0;
-
-  // Variável bebida guarda o número da bebida escolhido
-  int bebida = 0;
-
-  // Variável pagamento guarda o número do pagamento escolhido
-  int pagamento = 0;
 
   // Variáveis Windows
   #ifdef WIN32
@@ -233,20 +272,20 @@ int main(int argc, char **argv) {
   // Aqui as mensagens serão enviadas e recebidas, até que o usuário digite "sair"
   do {
 
+    // Limpar a tela
+    limpar();
+
     // Mostrar a tela
     escolher_tela(tela);
 
     // Ler o que o usuário digitar
     gets(linha);
-
-    // Limpar a tela
-    limpar();
     
     // Enviar o texto para o servidor
     sendto(sock,linha,80,0,(struct sockaddr *)&server,adl);
 
     // Exibir a próxima tela
-    //tela++;
+    tela++;
 
     // Receber o texto do servidor
     recvfrom(sock,linha,80,0,(struct sockaddr *)&server,&adl);

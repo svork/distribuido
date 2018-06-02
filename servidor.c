@@ -83,9 +83,6 @@ int main(void) {
         // Enviar para o cliente a resposta
         sendto(sock,linha,80,0,(struct sockaddr *)&client,adl);
         
-        // Exibir a próxima tela
-        tela++;
-
     } while (strcmp (linha,"sair") );
   }
 	else {
