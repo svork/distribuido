@@ -140,13 +140,116 @@ int escolher_pagamento(void) {
 
 // Função confirmar_pedido - exibe os detalhes do pedido do cliente
 void confirmar_pedido(char nome[20], int comida, int bebida, int pagamento) {
-  printf("=======================================================================\n");
-  printf("Este é o seu pedido\n");
+  printf("========================= PEDIDO =====================================\n");
   printf("\n");
   printf ("Nome do Cliente: %s\n", nome);
-  printf("Comida: %d\n", comida);
-  printf("Bebida: %d\n", bebida);
-  printf("Forma de Pagamento: %d\n", pagamento);
+
+  // Switch pata determinar a comida escolhida
+  switch (comida) {
+    case 0 :
+      printf("Comida (0) - Marinado de salmão com lentilha puy\n");
+      break;
+
+    case 1 :
+      printf("Comida (1) - Peixe à grega com tomates marinados\n");
+      break;
+
+    case 2 :
+      printf("Comida (2) - Pescada amarela ao forno com purê de berinjela\n");
+      break;
+
+    case 3 :
+      printf("Comida (3) - Camarão ao tamarindo e leite de coco\n");
+      break;
+
+    case 4 :
+      printf("Comida (4) - Arroz de polvo com chips de alho-poró\n");
+      break;
+
+    case 5 :
+      printf("Comida (5) - Polvo com páprica e purê de batata-doce\n");
+      break;
+
+    case 6 :
+      printf("Comida (6) - Medalhões de lagosta e salada\n");
+      break;
+
+    case 7 :
+      printf("Comida (7) - Siri mole com maionese de alga nori\n");
+      break;
+
+    case 8 :
+      printf("Comida (8) - Empanada de banana-verde com recheio de siri\n");
+      break;
+
+    case 9 :
+      printf("Comida (9) - Hambúrguer de salmão com maionese de lima da pérsia\n");
+      break;
+
+    default :
+      // Mensagem de erro
+      printf("\nOpcao Invalida!\n");
+      break;
+  }
+  
+  // Switch pata determinar a bebida escolhida
+  switch (bebida) {
+    case 0 :
+      printf("Bebida (0) - Vinho Azul\n");
+      break;
+
+    case 1 :
+      printf("Bebida (1) - Catuaba com açaí\n");
+      break;
+
+    case 2 :
+      printf("Bebida (2) - Vinho peçonhento\n");
+      break;
+
+    case 3 :
+      printf("Bebida (3) - Golden Coconut\n");
+      break;
+
+    case 4 :
+      printf("Bebida (4) - Cerveja de Chá Verde\n");
+      break;
+
+    case 5 :
+      printf("Bebida (5) - Whisky de ouro\n");
+      break;
+    case 6 :
+      printf("Bebida (6) - Vinho para gatos\n");
+      break;
+
+    case 7 :
+      printf("Bebida (7) - Suco de Farinha de Banana Verde\n");
+      break;
+
+    default :
+      // Mensagem de erro
+      printf("\nOpcao Invalida!\n");
+      break;
+  }
+
+  // Switch para determinar a forma de pagamento escolhida
+  switch (pagamento) {
+    case 0 :
+      printf("Forma de Pagamento (0) - Dinheiro\n");
+      break;
+
+    case 1 :
+      printf("Forma de Pagamento (1) - Cartão de Crédito\n");
+      break;
+
+    case 2 :
+      printf("Forma de Pagamento (2) - Cripto Moedas\n");
+      break;
+
+    default :
+      // Mensagem de erro
+      printf("\nOpcao Invalida!\n");
+      break;
+  }
   printf("\n");
   printf ("Seu pedido será entregue em: 10 minutos.\n");
   printf ("Após 15 segundos essa mensagem se auto-destruirá.\n");
